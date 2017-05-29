@@ -44,11 +44,12 @@ body {
 }
 
 #target {
-  height: 50px;
-  width: 50px;
-  background-color: rgba(232, 12, 155,0.9); /*red*/
+  height: 600px;
+  width: 98%;
+  /*//margin-right = -2px;*/
+  /*background-color: rgb(253, 13, 255); /*pink*/
   position: absolute;
   top: 120px;
-  left: 120px;
-  border-radius: 50%;
+  left: 10px;
+  border: 1px solid black;
   }

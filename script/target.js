@@ -1,7 +1,7 @@
 var Target = function(settings) {
 
     // Settings
-    var targetElement = null;
+    //var targetElement = null;
     var bullets = [];
 
     /*

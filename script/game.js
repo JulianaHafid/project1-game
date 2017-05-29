@@ -6,7 +6,8 @@ var Game = function() {
     settings.walls = true;                 // The player can not go outside the screen
     settings.automatic = false;            // The player will move by itself
     settings.godmode = false;              // Debug mode
-
+    settings.timer = 180;  
+    settings.maxTarget = 20;                //game timer
     // World settings
     var assets = [];                      // All game objects
     var player = new Player(settings);      // The player
@@ -82,6 +83,9 @@ var Game = function() {
       setupEvents();
     }
 
+    //do the game countdown and display time on the board
+
+
     // The render function. It will be called 60/sec
     function render(){
 
@@ -110,3 +114,18 @@ var Game = function() {
 }
 
 var g = new Game();     //initialise game
+
+//timer
+var seconds_left = 60;
+var interval = setInterval(function() {
+    document.getElementById('timer').innerHTML = "00:" + --seconds_left;
+    if(seconds_left < 10)
+    {
+      document.getElementById('timer').innerHTML = "00:0" + --seconds_left;
+    }
+    if (seconds_left <= 0)
+    {
+          document.getElementById('timer').innerHTML = 'End Game';
+          clearInterval(interval);
+    }
+}, 1000);

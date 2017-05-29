@@ -3,7 +3,7 @@ var Bullet = function(settings) {
     // Settings
     var bulletElement = null;
     var targetElement = null;
-
+    var maxTarget = parseInt(settings.maxTarget);
 
     function wall() {
       var bulletRect = bulletElement.getBoundingClientRect();
@@ -35,7 +35,7 @@ var Bullet = function(settings) {
              clearInterval(id);
              bulletElement.style.display = "none";
           } else {
-            pos-=2;
+            pos-=3;
             bulletElement.style.top = pos +'px';
           }//else close
         }//function frame close
@@ -49,9 +49,51 @@ var Bullet = function(settings) {
     } // function close
 
 
-    function create() {
+    function create(maxTarget) {
+        //var w = parseInt(window.innerWidth);
+        //get width and height of window
+        var w = document.getElementById('target').clientWidth;
+        var h = document.getElementById('target').clientHeight;
+        var maxTarget = 20;
+        //var h = parseInt(window.innerHeight);
         // Create the object asset
         console.log("create in Bullet class");
+        //to create a target
+        //var i = Math.floor(Math.random() * 20);
+
+            //test : var targetElement = new Array();
+            //targetElement.document.createElement('div');
+            var topMin = Math.ceil(50);
+            var topMax = Math.floor(h-70); //70 = give buffer to be in the height container
+            var leftMin = Math.ceil(10);
+            var leftMax = Math.floor(w - 50);  //50 = give buffer to be in the width of container
+            var randomPosTop = Math.floor(Math.random() * (topMax - topMin + 1)) + topMin;
+            var randomPosLeft = Math.floor(Math.random() * (leftMax - leftMin + 1)) + leftMin;
+            console.log("randomTop: "+randomPosTop);
+            targetElement= document.createElement('span');
+            //targetElement.className = (target + "i");
+            //targetElement.setAttribute("class",target + "i");
+            targetElement.style.height = '50px';
+            targetElement.style.width = '50px';
+            targetElement.style.position = "absolute";
+            targetElement.style.top = randomPosTop+'px';
+            targetElement.style.left = randomPosLeft+'px';
+            targetElement.style.borderRadius="50%";
+            targetElement.style.backgroundColor="rgb(253, 13, 255)";
+            document.getElementById('target').appendChild(targetElement);
+            //i++;
+            console.log("Target length: "+targetElement.length);
+            console.log("I am in init bullet");
+
+          //}
+
+
+        //cardElement = document. createElement('img');
+    		//cardElement.setAttribute('src',"images/back.png");
+        //cardElement.setAttribute('data-id',i);
+        //cardElement.addEventListener('click', flipcard);
+        //appendChild;
+
     }
 
     function init(){
@@ -67,31 +109,19 @@ var Bullet = function(settings) {
       bulletElement.style.height = '50px';
       bulletElement.style.width = '10px';
       bulletElement.style.display = "initial";
-
-      //to create a target
-      var i;
-      var targetElement= new Array();
-      var randomPosLeft = Math.floor(Math.random() * (w - 20));
-      var min = Math.ceil(101);
-      var max = Math.floor(h-110);
-      var randomPosTop = Math.floor(Math.random() * (max - min + 1)) + min;
-      console.log("randomTop: "+randomPosTop);
-      targetElement[i]= document.getElementById('target');
-      targetElement[i].style.top = randomPosTop+'px';
-      targetElement[i].style.left = randomPosLeft+'px';
-      targetElement[i].style.height = '50px';
-      targetElement[i].style.width = '50px';
-      i++;
-      console.log("Target Length: "+targetElement.length);
-      console.log("I am in init bullet");
-
-
     }
 
     this.render = function(interactions){
-      //create();
+      if(maxTarget!= 0)
+      {
+        setInterval(create(maxTarget),2000);
+        //create(maxTarget);
+        maxTarget--;
+        console.log("MaxTarget: " + maxTarget);
+      }
       move(interactions);
     }
-
     init();
+
+
 }
