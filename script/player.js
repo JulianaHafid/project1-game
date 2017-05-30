@@ -34,6 +34,12 @@ var Player = function(settings) {
       }
     }
 
+    function leftPos(){
+      var playerRect = playerElement.getBoundingClientRect();
+      playerRect.left
+
+    }
+
     // Move the ball around manually
     function move(interactions){
       var playerRect = playerElement.getBoundingClientRect();
@@ -60,9 +66,10 @@ var Player = function(settings) {
     function init(){
       // create();
       playerElement = document.getElementById('player');
-      playerElement.style.bottom = '5';
+      playerElement.style.bottom = '5px';
       playerElement.style.left = '50%'; //50%
       playerElement.style.height = '50px';
+      playerElement.style.width = '100px';
     }
 
     this.render = function(interactions){

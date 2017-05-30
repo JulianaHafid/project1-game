@@ -34,14 +34,18 @@ body {
 
 
 #bullet {
-  height: 30px;
+
+  /*height: 30px;
   width: 2px;
-  background-color: rgb(255, 105, 13); /*orange*/
+  background-color: rgb(255, 105, 13); /*orange
   position: absolute;
   bottom: 0px;
   left: 50%;
   margin-left: 45px;
+  display:none;*/
 }
+
+
 
 #target {
   height: 600px;
@@ -52,4 +56,5 @@ body {
   top: 120px;
   left: 10px;
   border: 1px solid black;
+  /*display: none;*/
   }

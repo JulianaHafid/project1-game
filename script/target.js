@@ -1,91 +1,76 @@
 var Target = function(settings) {
 
     // Settings
-    //var targetElement = null;
-    var bullets = [];
+    var targetElement = null;
 
-    /*
-    bottom:265
-    height:100
-    left:400
-    right:500
-    top:165
-    width:100
-*/
+    var maxTarget = parseInt(settings.maxTarget);
+
 
     function wall() {
-      //to get the height width left right
-      var playerRect = playerElement.getBoundingClientRect();
-
-      //get width and height of window
-      var w = parseInt(window.innerWidth);
-        //get width and height of window
-      var h = parseInt(window.innerHeight);
-
-      //dont need playerRect.bottom  since player move left / right only and bullet move up only
-      /*if(playerRect.bottom > h){
-        // w subtract
-        playerElement.style.top = (h-playerRect.height) + 'px';
-      }*/
-
-      if(playerRect.left < 0){
-          playerElement.style.left = '0px';
-      }
-
-      if(playerRect.right > w){
-          // w subtract
-          playerElement.style.left = ( w - playerRect.width) + 'px' ;
-      }
 
     }
 
     // Move the ball around manually
     function move(interactions){
-      var playerRect = playerElement.getBoundingClientRect();
-      //console.log("just in move interation player");
-      //var playerLeftPos = playerRect.left;
 
-      //dont need the down key and up...moving up is spacebar
-      /*
-      if(interactions.up){
-        playerElement.style.top = parseInt(playerElement.style.top)-8+"px";
-      }
-
-
-      if(interactions.down){
-        playerElement.style.top = parseInt(playerElement.style.top)+8+"px";
-      }*/
-
-      //get the .left position cannot get from init as its initliase to centre of the page
-      if(interactions.left){
-        playerElement.style.left = parseInt(playerRect.left)-8+"px";
-      }
-
-      if(interactions.right){
-        playerElement.style.left = parseInt(playerRect.left)+8+"px";
-      }
-
-
-      if(settings.walls){
-        wall();
-      }
     }
 
     function create() {
         // Create the object asset
+        //var maxTarget = 60;
+
+        var interval = setInterval(function()
+        {
+
+          targetElement = document.getElementById('target');
+          var targetRect = targetElement.getBoundingClientRect();
+          var targetHeight = targetRect.height;
+          var targetWidth = targetRect.width;
+          console.log("Target Height: " + targetHeight);
+          var targetPos = g.getTargetInfo();
+
+          var topMin = Math.ceil(50);
+          var topMax = Math.floor(targetPos.height - 70); //70 = give buffer to be in the height container
+          var leftMin = Math.ceil(10);
+          var leftMax = Math.floor(targetPos.width - 50);  //50 = give buffer to be in the width of container
+          var randomPosTop = Math.floor(Math.random() * (topMax - topMin + 1)) + topMin;
+          var randomPosLeft = Math.floor(Math.random() * (leftMax - leftMin + 1)) + leftMin;
+          console.log("topMax: " + topMax + " -> randomTop: "+randomPosTop + " : " +randomPosLeft);
+          targetElement= document.createElement('span');
+          targetElement.style.height = '50px';
+          targetElement.style.width = '50px';
+          targetElement.style.position = "absolute";
+          targetElement.style.top = randomPosTop+'px';
+          targetElement.style.left = randomPosLeft+'px';
+          targetElement.style.borderRadius="50%";
+          targetElement.style.margin='10px';
+          targetElement.style.backgroundColor="rgb(253, 13, 255)";
+          //targetElement.style.display="none";
+          document.getElementById('target').appendChild(targetElement);
+          clearInterval(interval);
+        //i++;
+          }, 1000);
+
+
     }
 
     function init(){
       // create();
-      playerElement = document.getElementById('player');
-      playerElement.style.bottom = '5';
-      playerElement.style.left = '50%'; //50%
-      playerElement.style.height = '50px';
+
+
     }
 
     this.render = function(interactions){
       //console.log("player render");
-      move(interactions);
+      if(maxTarget!= 0) //need to check also collision , if collide create new ball if not ball overla
+      {
+        //var id = setInterval(create(maxTarget),3000);
+        create();
+        maxTarget--;
+        console.log("MaxTarget: " + maxTarget);
+      }
+
+     move(interactions);
 
     }
 

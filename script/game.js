@@ -6,15 +6,23 @@ var Game = function() {
     settings.walls = true;                 // The player can not go outside the screen
     settings.automatic = false;            // The player will move by itself
     settings.godmode = false;              // Debug mode
-    settings.timer = 180;  
-    settings.maxTarget = 20;                //game timer
+    settings.timer = 180;
+    settings.maxTarget = 20;
+    settings.timer = 60;             //game timer
+    settings.bulletId = 1;
+
     // World settings
     var assets = [];                      // All game objects
     var player = new Player(settings);      // The player
+    var target = new Target(settings);
     var bullet = new Bullet(settings);
+
+    //var target = new Target(settings);
    //var bullet = new Bullet();
     assets[0] = player;
-    assets[1] = bullet;
+    assets[1] = target;
+    assets[2] = bullet;
+    //assets[2]= target;
     var frame = 0;                        // Frames since the start of the game
 
     // Interactions
@@ -78,6 +86,33 @@ var Game = function() {
 
     }
 
+    //get Target information - height,width,position
+    this.getTargetInfo = function(){
+      var targetPos = {};
+      targetElement = document.getElementById('target');
+      var targetRect = targetElement.getBoundingClientRect();
+      targetPos.height = targetRect.height;
+      targetPos.width = targetRect.width;
+      targetPos.top = targetRect.top;
+      targetPos.bottom = targetRect.bottom;
+      targetPos.left = targetRect.left;
+      return targetPos;
+    }
+
+    this.getPlayerInfo = function()
+    {
+      var playerPos = {};
+      playerElement = document.getElementById('player');
+      var playerRect = playerElement.getBoundingClientRect();
+      playerPos.height = playerRect.height;
+      playerPos.width = playerRect.width;
+      playerPos.top = playerRect.top;
+      playerPos.bottom = playerRect.bottom;
+      playerPos.left = playerRect.left;
+      return playerPos;
+    }
+
+
     // Startup the game
     function init(){
       setupEvents();
@@ -87,14 +122,15 @@ var Game = function() {
 
 
     // The render function. It will be called 60/sec
-    function render(){
+    this.render = function(){ // Change to this.render
+       for(var i=0; i < assets.length; i++){
+         assets[i].render(interactions);
+       }
 
-      for(var i=0; i < assets.length; i++){
-        assets[i].render(interactions);
+       frame++;
+     }
 
-      }
-    }
-
+    var self = this;
     window.requestAnimFrame = (function(){
       return  window.requestAnimationFrame       ||
               window.webkitRequestAnimationFrame ||
@@ -107,7 +143,7 @@ var Game = function() {
 
             (function animloop(){
               requestAnimFrame(animloop);
-              render();
+              self.render();
             })();
 
             init();
