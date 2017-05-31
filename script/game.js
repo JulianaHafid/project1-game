@@ -117,9 +117,27 @@ var Game = function()
     function init()
     {
       setupEvents();
+      timer();
     }
 
     //do the game countdown and display time on the board
+    //timer
+    function timer()
+    {
+      var seconds_left = 60;
+      var interval = setInterval(function() {
+          document.getElementById('timer').innerHTML = "00:" + --seconds_left;
+          if(seconds_left < 10)
+          {
+            document.getElementById('timer').innerHTML = "00:0" + --seconds_left;
+          }
+          if (seconds_left <= 0)
+          {
+                document.getElementById('timer').innerHTML = 'End Game';
+                clearInterval(interval);
+          }
+        }, 1000);
+      }
 
 
     // The render function. It will be called 60/sec
@@ -153,18 +171,3 @@ var Game = function()
 }
 
 var g = new Game();     //initialise game
-
-//timer
-var seconds_left = 60;
-var interval = setInterval(function() {
-    document.getElementById('timer').innerHTML = "00:" + --seconds_left;
-    if(seconds_left < 10)
-    {
-      document.getElementById('timer').innerHTML = "00:0" + --seconds_left;
-    }
-    if (seconds_left <= 0)
-    {
-          document.getElementById('timer').innerHTML = 'End Game';
-          clearInterval(interval);
-    }
-}, 1000);

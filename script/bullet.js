@@ -62,7 +62,6 @@ var Bullet = function(settings)
 
 
     function init(){
-
     }
 
     this.render = function(interactions){
@@ -71,5 +70,4 @@ var Bullet = function(settings)
 
     init();
 
-
-}
+} //close Bullet class

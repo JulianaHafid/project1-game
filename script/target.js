@@ -5,17 +5,8 @@ var Target = function(settings)
     var maxTarget = parseInt(settings.maxTarget);
 
 
-    function wall() {
-
-    }
-
-    // Move the ball around manually
-    function move(interactions){
-
-    }
-
-    function create() {
-        // Create the targets
+    function create()
+    {       // Create the targets
 
         var interval = setInterval(function()
         {
@@ -38,15 +29,12 @@ var Target = function(settings)
           targetElement.style.backgroundColor="rgb(253, 13, 255)";
           document.getElementById('target').appendChild(targetElement);
           clearInterval(interval);
-        //i++;
-          }, 1000);
-
+        }, 1000); //interval 1 sec (1000ms)
 
     }
 
     function init(){
       // create();
-
     }
 
     this.render = function(interactions)
@@ -58,7 +46,6 @@ var Target = function(settings)
         maxTarget--;
         console.log("MaxTarget: " + maxTarget);
       }
-     move(interactions);
     }
 
     init();
