@@ -1,8 +1,7 @@
-var Target = function(settings) {
-
+var Target = function(settings)
+{
     // Settings
     var targetElement = null;
-
     var maxTarget = parseInt(settings.maxTarget);
 
 
@@ -16,19 +15,11 @@ var Target = function(settings) {
     }
 
     function create() {
-        // Create the object asset
-        //var maxTarget = 60;
+        // Create the targets
 
         var interval = setInterval(function()
         {
-
-          targetElement = document.getElementById('target');
-          var targetRect = targetElement.getBoundingClientRect();
-          var targetHeight = targetRect.height;
-          var targetWidth = targetRect.width;
-          console.log("Target Height: " + targetHeight);
           var targetPos = g.getTargetInfo();
-
           var topMin = Math.ceil(50);
           var topMax = Math.floor(targetPos.height - 70); //70 = give buffer to be in the height container
           var leftMin = Math.ceil(10);
@@ -45,7 +36,6 @@ var Target = function(settings) {
           targetElement.style.borderRadius="50%";
           targetElement.style.margin='10px';
           targetElement.style.backgroundColor="rgb(253, 13, 255)";
-          //targetElement.style.display="none";
           document.getElementById('target').appendChild(targetElement);
           clearInterval(interval);
         //i++;
@@ -57,21 +47,18 @@ var Target = function(settings) {
     function init(){
       // create();
 
-
     }
 
-    this.render = function(interactions){
+    this.render = function(interactions)
+    {
       //console.log("player render");
       if(maxTarget!= 0) //need to check also collision , if collide create new ball if not ball overla
       {
-        //var id = setInterval(create(maxTarget),3000);
         create();
         maxTarget--;
         console.log("MaxTarget: " + maxTarget);
       }
-
      move(interactions);
-
     }
 
     init();

@@ -1,57 +1,49 @@
-var Bullet = function(settings) {
+var Bullet = function(settings)
+{
 
     // Settings
     var bulletElement = null;
     var bulletId = parseInt(settings.bulletId);
 
-
-    function wall() {
-
-    }
-
-    // Move the ball around manually
-    function move(interactions){
-
-
-      if(interactions.space){
-
+    // when a space key is hit, go to this function
+    function move(interactions)
+    {
+      if(interactions.space)
+      {
         create();
 
-        //update position of target 3px forward at a time
-        //bulletElement.style.visibility = "hidden";
-        var id = setInterval(frame, 20);
-        function frame() {
+        var id = setInterval(updatePos, 20);   //update position of target 3px forward at a time
+        function updatePos()
+        {
 
           var targetPos = g.getTargetInfo();   //get the #target div position
           var playerPos = g.getPlayerInfo();   //get the #player div position
           var bulletRect = bulletElement.getBoundingClientRect();
           pos = bulletRect.top;
 
-          if (pos <targetPos.top) {  //within targetPos.top
-
+          if (pos <targetPos.top)    //within #target div
+          {
              bulletElement.style.visibility = "hidden";
              clearInterval(id);
-             //bulletElement.style.bottom = playerPos.bottom;
-
-          } else {
+          }
+          else
+          {
             pos-=3;
-            //bulletElement.style.visibility = "visible";
             bulletElement.style.top = pos +'px';
-          }//else close
-        }//function frame close
-     }
-
+          } //closed else statement
+        }//close updatePos()
+     } //close if(interactions.space)
     } // function close
 
 
-    function create() {
-
+    //create the bullet
+    function create()
+    {
         console.log("create in Bullet class");
         //getPlayer height since everytime bullet create its left position should be same as player left position
         var playerPos = g.getPlayerInfo();
 
-        //create bullet
-
+        //set the style for bullet
         bulletElement = document.createElement('span');
         bulletElement.id = ("bullet");
         bulletElement.className = ""+bulletId;
@@ -64,9 +56,7 @@ var Bullet = function(settings) {
         bulletElement.style.backgroundColor="rgb(255, 105, 13)";
         //bulletElement.style.visibility = "hidden";
         document.getElementById('containerId').appendChild(bulletElement);
-
         bulletId++;
-
     }
 
 

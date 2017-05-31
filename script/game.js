@@ -1,4 +1,5 @@
-var Game = function() {
+var Game = function()
+{
 
     // Game settings
     var settings = {};                     // Containes all game settings
@@ -8,8 +9,8 @@ var Game = function() {
     settings.godmode = false;              // Debug mode
     settings.timer = 180;
     settings.maxTarget = 20;
-    settings.timer = 60;             //game timer
-    settings.bulletId = 1;
+    settings.timer = 60;                   //game timer , max time given
+    settings.bulletId = 1;                 //ID of bullets
 
     // World settings
     var assets = [];                      // All game objects
@@ -17,12 +18,10 @@ var Game = function() {
     var target = new Target(settings);
     var bullet = new Bullet(settings);
 
-    //var target = new Target(settings);
-   //var bullet = new Bullet();
     assets[0] = player;
     assets[1] = target;
     assets[2] = bullet;
-    //assets[2]= target;
+
     var frame = 0;                        // Frames since the start of the game
 
     // Interactions
@@ -87,7 +86,8 @@ var Game = function() {
     }
 
     //get Target information - height,width,position
-    this.getTargetInfo = function(){
+    this.getTargetInfo = function()
+    {
       var targetPos = {};
       targetElement = document.getElementById('target');
       var targetRect = targetElement.getBoundingClientRect();
@@ -114,7 +114,8 @@ var Game = function() {
 
 
     // Startup the game
-    function init(){
+    function init()
+    {
       setupEvents();
     }
 
@@ -122,8 +123,10 @@ var Game = function() {
 
 
     // The render function. It will be called 60/sec
-    this.render = function(){ // Change to this.render
-       for(var i=0; i < assets.length; i++){
+    this.render = function()
+    {
+       for(var i=0; i < assets.length; i++)
+       {
          assets[i].render(interactions);
        }
 
