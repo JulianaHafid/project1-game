@@ -44,17 +44,16 @@ var Player = function(settings) {
     function move(interactions){
       var playerRect = playerElement.getBoundingClientRect();
 
-      //get the .left position cannot get from init as its initliase to centre of the page
+
       if(interactions.left){
         playerElement.style.left = parseInt(playerRect.left)-8+"px";
-        clearBullet()
+        //clearBullet();
       }
 
       if(interactions.right){
         playerElement.style.left = parseInt(playerRect.left)+8+"px";
-        clearBullet()
+        //clearBullet();
       }
-
 
       if(settings.walls){
         wall();

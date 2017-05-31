@@ -13,18 +13,20 @@ var Bullet = function(settings)
       if(interactions.space)
       {
         create();
-        var id = setInterval(updatePos, 20);   //update position of target 3px forward at a time
+        var id = setInterval(updatePos, 30);   //update position of target 3px forward at a time
         function updatePos()
         {
 
           var targetPos = g.getTargetInfo();   //get the #target div position
           var playerPos = g.getPlayerInfo();   //get the #player div position
+          var audio = document.getElementById("audioTargetBurst");
+
           var bulletRect = bulletElement.getBoundingClientRect();
           pos = bulletRect.top;
 
           if (pos <targetPos.top)    //within #target div
           {
-             bulletElement.style.visibility = "hidden";
+             clearBullet();
              clearInterval(id);
           }
           else
@@ -37,24 +39,32 @@ var Bullet = function(settings)
                 //check if there is any intersection
                 if(intersection(i))
                   {
-                    //hide the target that == targetId
-                    //remove the bullet element else it will keep moving up
-                    //increment point variable by 50
+                    //hide the target that == targetId remove the bullet element else it will keep moving up
+                    //increment points
                     var targetElement = document.getElementById("target").getElementsByTagName('span')[i];
                     var targetPos = targetElement.getBoundingClientRect();
-                    targetElement.style.visibility = "hidden";
-                    points1 += 50;
+                    audio.play();
+                    targetElement.style.display = "none";                //cannot be visibility:hidden else when bullet hit still detect intersection
+                    console.log(points1 ++);
 
-                    //bulletElement.classList.remove("bullet");
                   }
-              }
-
+              } // close for statement
 
           } //closed else statement
 
         }//close updatePos()
      } //close if(interactions.space)
     } // function close
+
+    function clearBullet()
+    {
+      var bulletContainer= document.getElementById('containerId')
+      var bullet = document.getElementById("bullet");
+        if(bullet)
+        {
+          bulletContainer.removeChild(bullet);
+        }
+    }
 
     //create the bullet
     function create()
@@ -68,15 +78,13 @@ var Bullet = function(settings)
         //set the style for bullet
         bulletElement = document.createElement('span');
         bulletElement.id = ("bullet");
-        //bulletElement.className = "bullet";
         bulletElement.style.position = 'absolute';
-        bulletElement.style.height = '50px';
+        bulletElement.style.height = '10px';
         bulletElement.style.width = '10px';
         bulletElement.style.top = playerPos.top+"px";
         bulletElement.style.left = (playerPos.left + 45)+"px";     //bullet left = player left + 45 (make it centre)
-        bulletElement.style.backgroundColor="rgb(255, 105, 13)";
+        bulletElement.style.backgroundColor="rgb(255, 0, 0)";
         document.getElementById('containerId').appendChild(bulletElement);
-        //bulletId++;
     }
 
     function init()
@@ -104,10 +112,16 @@ var Bullet = function(settings)
       var th = targetPos.height;
 
       //a - bullet b = target
-      return bx < tx + tw && bx + bw > tx && by < ty + th && by + bh > ty;
+      return bx < (tx + tw) &&
+             (bx + bw) > tx &&
+             by < (ty + th) &&
+             (by + bh) > ty;
     }
 
-
+    this.getPoints = function()
+    {
+      return points1;
+    }
 
     this.render = function(interactions)
     {

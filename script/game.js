@@ -127,16 +127,19 @@ var Game = function()
     function timer()
     {
       var timer = parseInt(settings.timer);
-      var interval = setInterval(function() {
-          document.getElementById('info').innerHTML = "00:" + --timer;
+      var interval = setInterval(function()
+      {
+          points1 = bullet.getPoints();
+          var timerElement = document.getElementById('info');
+          timerElement.innerHTML = "00:" + timer-- + "     "+points1+" points" ;
           if(timer < 10)
           {
-            document.getElementById('info').innerHTML = "00:0" + --timer;
+            timerElement.innerHTML = "00:0" + timer-- + "     "+points1+" points";
           }
           if (timer <= 0)
           {
-                document.getElementById('info').innerHTML = "End Game";
-                //document.getElementById('info').innerHTML = settings.points1;
+                timerElement.innerHTML = "End Game";
+                //timerElement.innerHTML = "Congratulations! You have "+ points +" points";
                 clearInterval(interval);
           }
         }, 1000);
