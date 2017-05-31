@@ -11,6 +11,7 @@ var Game = function()
     settings.maxTarget = 20;
     settings.timer = 60;                   //game timer , max time given
     settings.bulletId = 1;                 //ID of bullets
+    settings.targetId = 0;
 
     // World settings
     var assets = [];                      // All game objects

@@ -3,11 +3,11 @@ var Target = function(settings)
     // Settings
     var targetElement = null;
     var maxTarget = parseInt(settings.maxTarget);
+    var targetId = parseInt(settings.targetId);
 
 
-    function create()
+    function create(targetId)
     {       // Create the targets
-
         var interval = setInterval(function()
         {
           var targetPos = g.getTargetInfo();
@@ -19,11 +19,12 @@ var Target = function(settings)
           var randomPosLeft = Math.floor(Math.random() * (leftMax - leftMin + 1)) + leftMin;
           console.log("topMax: " + topMax + " -> randomTop: "+randomPosTop + " : " +randomPosLeft);
           targetElement= document.createElement('span');
+          targetElement.className = targetId;
           targetElement.style.height = '50px';
           targetElement.style.width = '50px';
           targetElement.style.position = "absolute";
-          targetElement.style.top = randomPosTop+'px';
-          targetElement.style.left = randomPosLeft+'px';
+          targetElement.style.top = randomPosTop +'px';
+          targetElement.style.left = randomPosLeft +'px';
           targetElement.style.borderRadius="50%";
           targetElement.style.margin='10px';
           targetElement.style.backgroundColor="rgb(253, 13, 255)";
@@ -40,10 +41,11 @@ var Target = function(settings)
     this.render = function(interactions)
     {
       //console.log("player render");
-      if(maxTarget!= 0) //need to check also collision , if collide create new ball if not ball overla
+      if(maxTarget!=0) //need to check also collision , if collide create new ball if not ball overla
       {
-        create();
+        create(targetId);
         maxTarget--;
+        targetId++;
         console.log("MaxTarget: " + maxTarget);
       }
     }
