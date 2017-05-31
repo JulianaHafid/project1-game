@@ -32,7 +32,6 @@ body {
   left: 50%;
   }
 
-
 #bullet {
   /*height: 30px;
   width: 2px;
@@ -43,8 +42,6 @@ body {
   margin-left: 45px;
   display:none;*/
 }
-
-
 
 #target {
   height: 600px;

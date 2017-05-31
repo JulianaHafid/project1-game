@@ -17,7 +17,7 @@ var Target = function(settings)
           var leftMax = Math.floor(targetPos.width - 50);  //50 = give buffer to be in the width of container
           var randomPosTop = Math.floor(Math.random() * (topMax - topMin + 1)) + topMin;
           var randomPosLeft = Math.floor(Math.random() * (leftMax - leftMin + 1)) + leftMin;
-          console.log("topMax: " + topMax + " -> randomTop: "+randomPosTop + " : " +randomPosLeft);
+          //console.log("topMax: " + topMax + " -> randomTop: "+randomPosTop + " : " +randomPosLeft);
           targetElement= document.createElement('span');
           targetElement.className = targetId;
           targetElement.style.height = '50px';
@@ -26,7 +26,7 @@ var Target = function(settings)
           targetElement.style.top = randomPosTop +'px';
           targetElement.style.left = randomPosLeft +'px';
           targetElement.style.borderRadius="50%";
-          targetElement.style.margin='10px';
+          targetElement.style.margin='15px';
           targetElement.style.backgroundColor="rgb(253, 13, 255)";
           document.getElementById('target').appendChild(targetElement);
           clearInterval(interval);
@@ -40,13 +40,13 @@ var Target = function(settings)
 
     this.render = function(interactions)
     {
-      //console.log("player render");
+
       if(maxTarget!=0) //need to check also collision , if collide create new ball if not ball overla
       {
         create(targetId);
         maxTarget--;
         targetId++;
-        console.log("MaxTarget: " + maxTarget);
+        //console.log("MaxTarget: " + maxTarget);
       }
     }
 
