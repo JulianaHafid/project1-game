@@ -7,11 +7,12 @@ var Game = function()
     settings.walls = true;                 // The player can not go outside the screen
     settings.automatic = false;            // The player will move by itself
     settings.godmode = false;              // Debug mode
-    settings.timer = 180;
     settings.maxTarget = 20;
-    settings.timer = 60;                   //game timer , max time given
+    settings.timer = 60; //game timer , max time given
     settings.bulletId = 1;                 //ID of bullets
     settings.targetId = 0;
+    settings.points1 = 0;
+
 
     // World settings
     var assets = [];                      // All game objects
@@ -125,16 +126,17 @@ var Game = function()
     //timer
     function timer()
     {
-      var seconds_left = 60;
+      var timer = parseInt(settings.timer);
       var interval = setInterval(function() {
-          document.getElementById('timer').innerHTML = "00:" + --seconds_left;
-          if(seconds_left < 10)
+          document.getElementById('info').innerHTML = "00:" + --timer;
+          if(timer < 10)
           {
-            document.getElementById('timer').innerHTML = "00:0" + --seconds_left;
+            document.getElementById('info').innerHTML = "00:0" + --timer;
           }
-          if (seconds_left <= 0)
+          if (timer <= 0)
           {
-                document.getElementById('timer').innerHTML = 'End Game';
+                document.getElementById('info').innerHTML = "End Game";
+                //document.getElementById('info').innerHTML = settings.points1;
                 clearInterval(interval);
           }
         }, 1000);

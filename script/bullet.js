@@ -5,7 +5,7 @@ var Bullet = function(settings)
     var bulletElement = null;
     var bulletId = parseInt(settings.bulletId);
     var maxTarget = parseInt(settings.maxTarget);
-    //var targetId = parseInt(settings.targetId);
+    var points1 = parseInt(settings.points1);
 
     // when a space key is hit, go to this function
     function move(interactions)
@@ -43,16 +43,18 @@ var Bullet = function(settings)
                     var targetElement = document.getElementById("target").getElementsByTagName('span')[i];
                     var targetPos = targetElement.getBoundingClientRect();
                     targetElement.style.visibility = "hidden";
+                    points1 += 50;
+
                     //bulletElement.classList.remove("bullet");
                   }
               }
 
 
           } //closed else statement
+
         }//close updatePos()
      } //close if(interactions.space)
     } // function close
-
 
     //create the bullet
     function create()
@@ -66,7 +68,7 @@ var Bullet = function(settings)
         //set the style for bullet
         bulletElement = document.createElement('span');
         bulletElement.id = ("bullet");
-        bulletElement.className = ""+bulletId;
+        //bulletElement.className = "bullet";
         bulletElement.style.position = 'absolute';
         bulletElement.style.height = '50px';
         bulletElement.style.width = '10px';
@@ -74,7 +76,7 @@ var Bullet = function(settings)
         bulletElement.style.left = (playerPos.left + 45)+"px";     //bullet left = player left + 45 (make it centre)
         bulletElement.style.backgroundColor="rgb(255, 105, 13)";
         document.getElementById('containerId').appendChild(bulletElement);
-        bulletId++;
+        //bulletId++;
     }
 
     function init()

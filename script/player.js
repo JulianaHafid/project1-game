@@ -47,10 +47,12 @@ var Player = function(settings) {
       //get the .left position cannot get from init as its initliase to centre of the page
       if(interactions.left){
         playerElement.style.left = parseInt(playerRect.left)-8+"px";
+        clearBullet()
       }
 
       if(interactions.right){
         playerElement.style.left = parseInt(playerRect.left)+8+"px";
+        clearBullet()
       }
 
 
@@ -59,6 +61,13 @@ var Player = function(settings) {
       }
     }
 
+    function clearBullet(){
+      var bulletContainer= document.getElementById('containerId')
+      var bullet = document.getElementById("bullet");
+        if(bullet){
+          bulletContainer.removeChild(bullet);
+        }
+    }
     function create() {
         // Create the object asset
     }
@@ -70,6 +79,7 @@ var Player = function(settings) {
       playerElement.style.left = '50%'; //50%
       playerElement.style.height = '50px';
       playerElement.style.width = '100px';
+
     }
 
     this.render = function(interactions){
