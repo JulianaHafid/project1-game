@@ -5,6 +5,7 @@ var Bullet = function(settings)
     var bulletElement = null;
     var bulletId = parseInt(settings.bulletId);
     var maxTarget = parseInt(settings.maxTarget);
+    var targetId = parseInt(settings.targetId);
     var points1 = parseInt(settings.points1);
 
     // when a space key is hit, go to this function
@@ -23,6 +24,7 @@ var Bullet = function(settings)
 
           var bulletRect = bulletElement.getBoundingClientRect();
           pos = bulletRect.top;
+          //console.log("Timer from gameboard: " +g.getTimer());
 
           if (pos <targetPos.top)    //within #target div
           {
@@ -34,7 +36,8 @@ var Bullet = function(settings)
             pos-=3;
             bulletElement.style.top = pos +'px';
             //check bullet against each and every target if it intersects
-            for(var i = 0; i < maxTarget; i++)
+            var targetObject = g.getTarget();
+            for(var i = 0; i < targetObject.getTargetId(); i++)
               {
                 //check if there is any intersection
                 if(intersection(i))
@@ -46,7 +49,12 @@ var Bullet = function(settings)
                     audio.play();
                     targetElement.style.display = "none";                //cannot be visibility:hidden else when bullet hit still detect intersection
                     console.log(points1 ++);
-
+                    if (g.getTimer()>3)          //create new target if time left has at least 3 second
+                    {
+                      var targetObject = g.getTarget();
+                      targetObject.create();
+                      //target.create();
+                    }
                   }
               } // close for statement
 

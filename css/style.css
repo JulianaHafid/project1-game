@@ -2,6 +2,9 @@
 body {
   background-color: rgba(142, 73, 156,0.9); /*purple*/
   width: auto;
+
+
+
 }
 
 #infoBar h1{
@@ -30,6 +33,7 @@ body {
   position: absolute;
   bottom: 0px;
   left: 50%;
+
   }
 
 #bullet {
@@ -50,4 +54,8 @@ body {
   top: 120px;
   left: 10px;
   border: 1px solid black;
+  background-image:url("../images/rainbowsingle.png");
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+
   }

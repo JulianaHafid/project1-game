@@ -7,11 +7,12 @@ var Game = function()
     settings.walls = true;                 // The player can not go outside the screen
     settings.automatic = false;            // The player will move by itself
     settings.godmode = false;              // Debug mode
-    settings.maxTarget = 20;
-    settings.timer = 60; //game timer , max time given
+    settings.maxTarget = 35;
+    settings.timer = parseInt("60");                   //game timer , max time given
     settings.bulletId = 1;                 //ID of bullets
     settings.targetId = 0;
     settings.points1 = 0;
+
 
 
     // World settings
@@ -119,6 +120,8 @@ var Game = function()
     function init()
     {
       setupEvents();
+      var timerElement = document.getElementById('info');
+      timerElement.innerHTML = "Player 1 your turn" ;
       timer();
     }
 
@@ -126,24 +129,42 @@ var Game = function()
     //timer
     function timer()
     {
-      var timer = parseInt(settings.timer);
+      //var timer = parseInt(settings.timer);
       var interval = setInterval(function()
       {
+          var timerElement = document.getElementById('info');       //get the #info element
+
           points1 = bullet.getPoints();
-          var timerElement = document.getElementById('info');
-          timerElement.innerHTML = "00:" + timer-- + "     "+points1+" points" ;
-          if(timer < 10)
+          //var timerElement = document.getElementById('info');
+          console.log("Timer: " + settings.timer);
+          if(settings.timer>=10)
           {
-            timerElement.innerHTML = "00:0" + timer-- + "     "+points1+" points";
+          timerElement.innerHTML = "00:" + settings.timer + "           "+points1+" points" ;
           }
-          if (timer <= 0)
+          if(settings.timer <10)
+          {
+            timerElement.innerHTML = "00:0" + settings.timer + "           "+points1+" points";
+          }
+          if (settings.timer <= 0)
           {
                 timerElement.innerHTML = "End Game";
-                //timerElement.innerHTML = "Congratulations! You have "+ points +" points";
                 clearInterval(interval);
+                var intId = setInterval(function()
+                {
+                  window.location.reload(true);
+                  clearInterval(intId);                //stop the interval
+                }, 2000); //interval 1 sec (1000ms)
           }
+          settings.timer --;
         }, 1000);
       }
+
+      //return what is the timer now
+      this.getTimer = function()
+      {
+        return settings.timer;
+      }
+
 
 
     // The render function. It will be called 60/sec
@@ -156,6 +177,11 @@ var Game = function()
 
        frame++;
      }
+
+    this.getTarget = function()
+    {
+      return target;
+    }
 
     var self = this;
     window.requestAnimFrame = (function(){

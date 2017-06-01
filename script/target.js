@@ -5,33 +5,48 @@ var Target = function(settings)
     var maxTarget = parseInt(settings.maxTarget);
     var targetId = parseInt(settings.targetId);
 
-
-    function create(targetId)
-    {       // Create the targets
+    // Create the targets
+    this.create = function()
+    {
         var interval = setInterval(function()
         {
+
+          targetId++;
+
+          //get random position
           var targetPos = g.getTargetInfo();
           var topMin = Math.ceil(50);
-          var topMax = Math.floor(targetPos.height - 70); //70 = give buffer to be in the height container
+          var topMax = Math.floor(targetPos.height - 400); //200 = give buffer so that it will not be towards the bottom
           var leftMin = Math.ceil(10);
-          var leftMax = Math.floor(targetPos.width - 50);  //50 = give buffer to be in the width of container
+          var leftMax = Math.floor(targetPos.width - 180);  //50 = give buffer to be in the width of container
+
           var randomPosTop = Math.floor(Math.random() * (topMax - topMin + 1)) + topMin;
           var randomPosLeft = Math.floor(Math.random() * (leftMax - leftMin + 1)) + leftMin;
-          //console.log("topMax: " + topMax + " -> randomTop: "+randomPosTop + " : " +randomPosLeft);
+
+          //set all targetElement style
           targetElement= document.createElement('span');
           targetElement.className = targetId;
-          targetElement.style.height = '50px';
-          targetElement.style.width = '50px';
+          targetElement.style.height = '100px'; //50
+          targetElement.style.width = '100px';  //50
           targetElement.style.position = "absolute";
           targetElement.style.top = randomPosTop +'px';
           targetElement.style.left = randomPosLeft +'px';
-          targetElement.style.borderRadius="50%";
-          targetElement.style.margin='15px';
-          targetElement.style.backgroundColor="rgb(253, 13, 255)";
+          targetElement.style.borderRadius = "50%";
+          targetElement.style.margin = '20px';
+          //targetElement.style.backgroundColor="rgb(253, 13, 255)";
+          targetElement.style.backgroundImage = "url('./images/balloonpink.png')";
+          targetElement.style.backgroundSize = "100% 100%";
+          targetElement.style.backgroundRepeat = "no-repeat";
           document.getElementById('target').appendChild(targetElement);
-          clearInterval(interval);
+          clearInterval(interval);                //stop the interval
         }, 1000); //interval 1 sec (1000ms)
 
+    }
+
+
+    this.getTargetId = function ()
+    {
+      return targetId;
     }
 
     function init(){
@@ -43,9 +58,9 @@ var Target = function(settings)
 
       if(maxTarget!=0) //need to check also collision , if collide create new ball if not ball overla
       {
-        create(targetId);
+        this.create();
         maxTarget--;
-        targetId++;
+
         //console.log("MaxTarget: " + maxTarget);
       }
     }
