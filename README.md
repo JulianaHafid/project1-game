@@ -1,7 +1,7 @@
 Shooting balloon game
 -----------------------
 
-1. Player is will have to shoot as many balloons in 1 minute.
+1. Player will have to shoot as many balloons in 1 minute.
 2. A point will be awarded for every balloon that you burst.
 
 Current Release
