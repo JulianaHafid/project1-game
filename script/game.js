@@ -125,10 +125,10 @@ var Game = function()
       console.log("window-name value " + window.name);
       setupEvents();
       var timerElement = document.getElementById('info');
-      if (parseInt(window.name.substring(0,1)) == 0)
-      {
+    //  if (parseInt(window.name.substring(0,1)) == 1)
+    //  {
       timerElement.innerHTML = "Player 1 your turn" ;
-      }
+    //  }
       timer();
     }
 
@@ -154,9 +154,10 @@ var Game = function()
           }
           if (settings.timer <= 0)
           {
-            console.log(window.name);
-            var test = parseInt(window.name.substring(1,5));
-            console.log("points player 1 = " + test);
+            /*console.log(window.name);
+            var test = window.name.substring(0,1);
+
+            console.log("which player have played = " + test);
 
                 if (window.name.substring(0,1) == 0)    //only 1 player so dont compare
                   {
@@ -164,7 +165,7 @@ var Game = function()
                     settings.gameRun ++;
                     window.name = settings.gameRun + points1.toString();
                   }
-                  else
+                  else (window.name.substring(0,1) == 2)
                     {
                       if (parseInt(window.name.substring(1,5)) > points1)
                       {
@@ -179,15 +180,15 @@ var Game = function()
                         timerElement.innerHTML = "Player 2 wins";
                       }
                       window.name = "00";
-                    }
+                    }*/
 
 
-                //timerElement.innerHTML = "End Game";
+                timerElement.innerHTML = "End Game";
 
                 clearInterval(interval);
                 var intId = setInterval(function()
                 {
-                  window.location.reload(false);
+                  //window.location.reload(false);
                   clearInterval(intId);                //stop the interval
                 }, 2000); //interval 1 sec (1000ms)
             }

@@ -74,7 +74,7 @@ var Player = function(settings) {
     function init(){
       // create();
       playerElement = document.getElementById('player');
-      playerElement.style.bottom = '5px';
+      playerElement.style.bottom = '2px';
       playerElement.style.left = '50%'; //50%
       playerElement.style.height = '50px';
       playerElement.style.width = '100px';

@@ -2,7 +2,7 @@
 body {
   background-color: rgba(142, 73, 156,0.9); /*purple*/
   width: auto;  /*if value change , to check right interactions*/
-  
+
 }
 
 #infoBar h1{
@@ -27,7 +27,7 @@ body {
 #player {
   height: 50px;
   width: 100px;
-  background-color: rgba(255, 0, 0,0.9); /*red*/
+  background-color: rgb(237, 100, 167); /*red*/
   position: absolute;
   bottom: 0px;
   left: 50%;

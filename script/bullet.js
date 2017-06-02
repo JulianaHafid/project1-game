@@ -37,6 +37,10 @@ var Bullet = function(settings)
             bulletElement.style.top = pos +'px';
             //check bullet against each and every target if it intersects
             var targetObject = g.getTarget();
+
+            var targetEl = document.getElementById("target");
+            targetEl.style.backgroundImage = "url('./images/dashup.png')";
+
             for(var i = 0; i < targetObject.getTargetId(); i++)
               {
                 //check if there is any intersection
@@ -87,11 +91,12 @@ var Bullet = function(settings)
         bulletElement = document.createElement('span');
         bulletElement.id = ("bullet");
         bulletElement.style.position = 'absolute';
-        bulletElement.style.height = '10px';
-        bulletElement.style.width = '10px';
-        bulletElement.style.top = playerPos.top+"px";
+        bulletElement.style.height = '20px';
+        bulletElement.style.width = '20px';
+        bulletElement.style.top = (playerPos.top+50)+"px";
         bulletElement.style.left = (playerPos.left + 45)+"px";     //bullet left = player left + 45 (make it centre)
-        bulletElement.style.backgroundColor="rgb(255, 0, 0)";
+        //bulletElement.style.backgroundColor="rgb(232, 12, 234)";
+        bulletElement.style.backgroundImage = "url('./images/pink-star.png')";
         document.getElementById('containerId').appendChild(bulletElement);
     }
 
