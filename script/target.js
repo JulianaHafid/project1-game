@@ -15,6 +15,7 @@ var Target = function(settings)
 
           //get random position
           var targetPos = g.getTargetInfo();
+          targetPos.innerWidth;
           var topMin = Math.ceil(50);
           var topMax = Math.floor(targetPos.height - 400); //200 = give buffer so that it will not be towards the bottom
           var leftMin = Math.ceil(10);
@@ -60,7 +61,6 @@ var Target = function(settings)
       {
         this.create();
         maxTarget--;
-
         //console.log("MaxTarget: " + maxTarget);
       }
     }

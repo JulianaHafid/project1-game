@@ -7,21 +7,24 @@ var Game = function()
     settings.walls = true;                 // The player can not go outside the screen
     settings.automatic = false;            // The player will move by itself
     settings.godmode = false;              // Debug mode
-    settings.maxTarget = 35;
+    settings.maxTarget = 25;
     settings.timer = parseInt("60");                   //game timer , max time given
     settings.bulletId = 1;                 //ID of bullets
     settings.targetId = 0;
     settings.points1 = 0;
+    settings.gameRun = 0;
 
 
 
     // World settings
     var assets = [];                      // All game objects
-    var player = new Player(settings);      // The player
+    var player1 = new Player(settings);      // The player
     var target = new Target(settings);
     var bullet = new Bullet(settings);
 
-    assets[0] = player;
+
+
+    assets[0] = player1;
     assets[1] = target;
     assets[2] = bullet;
 
@@ -119,9 +122,13 @@ var Game = function()
     // Startup the game
     function init()
     {
+      console.log("window-name value " + window.name);
       setupEvents();
       var timerElement = document.getElementById('info');
+      if (parseInt(window.name.substring(0,1)) == 0)
+      {
       timerElement.innerHTML = "Player 1 your turn" ;
+      }
       timer();
     }
 
@@ -132,9 +139,9 @@ var Game = function()
       //var timer = parseInt(settings.timer);
       var interval = setInterval(function()
       {
-          var timerElement = document.getElementById('info');       //get the #info element
+          var timerElement = document.getElementById('info');
+          var points1 = bullet.getPoints();    //get the #info element
 
-          points1 = bullet.getPoints();
           //var timerElement = document.getElementById('info');
           console.log("Timer: " + settings.timer);
           if(settings.timer>=10)
@@ -147,14 +154,45 @@ var Game = function()
           }
           if (settings.timer <= 0)
           {
-                timerElement.innerHTML = "End Game";
+            console.log(window.name);
+            var test = parseInt(window.name.substring(1,5));
+            console.log("points player 1 = " + test);
+
+                if (window.name.substring(0,1) == 0)    //only 1 player so dont compare
+                  {
+                    timerElement.innerHTML = "End Game. Player 2 ready?";
+                    settings.gameRun ++;
+                    window.name = settings.gameRun + points1.toString();
+                  }
+                  else
+                    {
+                      if (parseInt(window.name.substring(1,5)) > points1)
+                      {
+                        timerElement.innerHTML = "Player 1 wins";
+                      }
+                      if (parseInt(window.name.substring(1,5)) == points1)
+                      {
+                        timerElement.innerHTML = "Both scored the same points";
+                      }
+                      else
+                      {
+                        timerElement.innerHTML = "Player 2 wins";
+                      }
+                      window.name = "00";
+                    }
+
+
+                //timerElement.innerHTML = "End Game";
+
                 clearInterval(interval);
                 var intId = setInterval(function()
                 {
-                  window.location.reload(true);
+                  window.location.reload(false);
                   clearInterval(intId);                //stop the interval
                 }, 2000); //interval 1 sec (1000ms)
-          }
+            }
+
+
           settings.timer --;
         }, 1000);
       }
@@ -166,40 +204,39 @@ var Game = function()
       }
 
 
+      // The render function. It will be called 60/sec
+      this.render = function()
+      {
+         for(var i=0; i < assets.length; i++)
+         {
+           assets[i].render(interactions);
+         }
 
-    // The render function. It will be called 60/sec
-    this.render = function()
-    {
-       for(var i=0; i < assets.length; i++)
-       {
-         assets[i].render(interactions);
+         frame++;
        }
 
-       frame++;
-     }
+      this.getTarget = function()
+      {
+        return target;
+      }
 
-    this.getTarget = function()
-    {
-      return target;
-    }
-
-    var self = this;
-    window.requestAnimFrame = (function(){
-      return  window.requestAnimationFrame       ||
-              window.webkitRequestAnimationFrame ||
-              window.mozRequestAnimationFrame    ||
-              function( callback ){
-                window.setTimeout(callback, 1000 / 60);
-              };
-            })();
+      var self = this;
+      window.requestAnimFrame = (function(){
+        return  window.requestAnimationFrame       ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame    ||
+                function( callback ){
+                  window.setTimeout(callback, 1000 / 60);
+                };
+              })();
 
 
-            (function animloop(){
-              requestAnimFrame(animloop);
-              self.render();
-            })();
+              (function animloop(){
+                requestAnimFrame(animloop);
+                self.render();
+              })();
 
-            init();
+              init();
 }
 
-var g = new Game();     //initialise game
+  var g = new Game();     //initialise game

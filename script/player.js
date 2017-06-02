@@ -47,7 +47,7 @@ var Player = function(settings) {
 
       if(interactions.left){
         playerElement.style.left = parseInt(playerRect.left)-8+"px";
-        clearBullet();
+        //clearBullet();
       }
 
       if(interactions.right){

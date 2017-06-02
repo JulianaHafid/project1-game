@@ -128,7 +128,13 @@ var Bullet = function(settings)
 
     this.getPoints = function()
     {
-      return points1;
+        return points1;
+    }
+
+    this.checkWinner = function()
+    {
+      if(points1!=0)
+        point
     }
 
     this.render = function(interactions)
