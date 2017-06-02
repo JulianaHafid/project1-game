@@ -188,7 +188,7 @@ var Game = function()
                 clearInterval(interval);
                 var intId = setInterval(function()
                 {
-                  //window.location.reload(false);
+                  window.location.reload(false);
                   clearInterval(intId);                //stop the interval
                 }, 2000); //interval 1 sec (1000ms)
             }
