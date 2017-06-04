@@ -7,12 +7,12 @@ var Game = function()
     settings.walls = true;                 // The player can not go outside the screen
     settings.automatic = false;            // The player will move by itself
     settings.godmode = false;              // Debug mode
-    settings.maxTarget = 25;
-    settings.timer = parseInt("60");                   //game timer , max time given
+    settings.maxTarget = 10;
+    settings.timer = parseInt("10");                   //game timer , max time given
     settings.bulletId = 1;                 //ID of bullets
     settings.targetId = 0;
     settings.points1 = 0;
-    settings.gameRun = 0;
+    settings.gameRun = 1;
 
 
 
@@ -122,13 +122,19 @@ var Game = function()
     // Startup the game
     function init()
     {
-      console.log("window-name value " + window.name);
+      //console.log("Start game window-name value " + window.name);
       setupEvents();
       var timerElement = document.getElementById('info');
-    //  if (parseInt(window.name.substring(0,1)) == 1)
-    //  {
-      timerElement.innerHTML = "Player 1 your turn" ;
-    //  }
+      //var audio = document.getElementById("music");
+      //audio.play();
+      //settings.gameRun = window.name.substring(0,1);
+      var gameRun = window.name.substring(0,1);
+      var prevPoints = parseInt(window.name.substring(1,5));
+      console.log ("Which player now :" + gameRun);
+      if (gameRun == "0" || gameRun == "") //"" if window reopened 0=when window restart
+      {
+        timerElement.innerHTML = "Player 1 your turn" ;
+      }
       timer();
     }
 
@@ -141,6 +147,10 @@ var Game = function()
       {
           var timerElement = document.getElementById('info');
           var points1 = bullet.getPoints();    //get the #info element
+          var gameRun = window.name.substring(0,1);
+          var prevPoints = parseInt(window.name.substring(1,5));
+          //console.log ("Which player now :" + gameRun);
+
 
           //var timerElement = document.getElementById('info');
           console.log("Timer: " + settings.timer);
@@ -154,24 +164,19 @@ var Game = function()
           }
           if (settings.timer <= 0)
           {
-            /*console.log(window.name);
-            var test = window.name.substring(0,1);
-
-            console.log("which player have played = " + test);
-
-                if (window.name.substring(0,1) == 0)    //only 1 player so dont compare
+                if (gameRun == "" || gameRun == "0")    //only 1 player so dont compare
                   {
                     timerElement.innerHTML = "End Game. Player 2 ready?";
-                    settings.gameRun ++;
-                    window.name = settings.gameRun + points1.toString();
+                    gameRun = 1;
+                    window.name = gameRun + (points1.toString());
                   }
-                  else (window.name.substring(0,1) == 2)
+                  else if (gameRun == "1")
                     {
-                      if (parseInt(window.name.substring(1,5)) > points1)
+                      if (prevPoints > points1)
                       {
                         timerElement.innerHTML = "Player 1 wins";
                       }
-                      if (parseInt(window.name.substring(1,5)) == points1)
+                      else if (prevPoints == points1)
                       {
                         timerElement.innerHTML = "Both scored the same points";
                       }
@@ -180,15 +185,14 @@ var Game = function()
                         timerElement.innerHTML = "Player 2 wins";
                       }
                       window.name = "00";
-                    }*/
+                    }
 
-
-                timerElement.innerHTML = "End Game";
+                //timerElement.innerHTML = "End Game";
 
                 clearInterval(interval);
                 var intId = setInterval(function()
                 {
-                  window.location.reload(false);
+                  window.location.reload(true);
                   clearInterval(intId);                //stop the interval
                 }, 2000); //interval 1 sec (1000ms)
             }

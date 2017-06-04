@@ -27,15 +27,15 @@ var Target = function(settings)
           //set all targetElement style
           targetElement= document.createElement('span');
           targetElement.className = targetId;
-          targetElement.style.height = '171px';
-          targetElement.style.width = '200px';
+          targetElement.style.height = '100px';
+          targetElement.style.width = '100px';
           targetElement.style.position = "absolute";
           targetElement.style.top = randomPosTop +'px';
           targetElement.style.left = randomPosLeft +'px';
           targetElement.style.borderRadius = "50%";
           targetElement.style.margin = '20px';
           //targetElement.style.backgroundColor="rgb(253, 13, 255)";
-          targetElement.style.backgroundImage = "url('./images/balloonpolkapink.png')";
+          targetElement.style.backgroundImage = "url('./images/blue ball.png')";
           targetElement.style.backgroundSize = "100% 100%";
           targetElement.style.backgroundRepeat = "no-repeat";
           document.getElementById('target').appendChild(targetElement);

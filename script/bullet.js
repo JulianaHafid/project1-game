@@ -93,8 +93,8 @@ var Bullet = function(settings)
         bulletElement.style.position = 'absolute';
         bulletElement.style.height = '20px';
         bulletElement.style.width = '20px';
-        bulletElement.style.top = (playerPos.top+50)+"px";
-        bulletElement.style.left = (playerPos.left + 45)+"px";     //bullet left = player left + 45 (make it centre)
+        bulletElement.style.top = (playerPos.top +10)+"px";
+        bulletElement.style.left = (playerPos.left+35)+"px";     //bullet left = player left + 45 (make it centre)
         //bulletElement.style.backgroundColor="rgb(232, 12, 234)";
         bulletElement.style.backgroundImage = "url('./images/pink-star.png')";
         document.getElementById('containerId').appendChild(bulletElement);
@@ -136,12 +136,12 @@ var Bullet = function(settings)
         return points1;
     }
 
-    this.checkWinner = function()
+/*    this.checkWinner = function()
     {
       if(points1!=0)
         point
     }
-
+*/
     this.render = function(interactions)
     {
       move(interactions);
