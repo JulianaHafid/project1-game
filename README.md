@@ -1,9 +1,21 @@
 Git and GitHub Intro Lab
 
+<<<<<<< HEAD
 Introduction
 
 Note: This can be a pair programming activity or done independently.
 Let's apply what we've learned from class to share and update each other's code. With a partner, you're going going to alternate between who 'drives' and who 'navigates' while following the requirements under "Exercise" below. The goal will be to create a project, have a partner fork, clone, and edit the project, submit the changes as a pull request, and then have the changes merged.
+=======
+1. Player will have to hit spacebar to shoot as many balloons in 1 minute.
+2. Hit left and right key to move left and right
+2. A point will be awarded for every balloon that you burst.
+
+URL : https://julianahafid.github.io/project1-game/
+
+Current Release
+----------------
+Only support 1 player.
+>>>>>>> af89dc8c8e540342bb2c85e6c184fad53586877a
 
 Be sure to look at the previous lesson for notes and helpful hints.
 
